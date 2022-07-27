@@ -1,0 +1,20 @@
+services:
+    db:
+        restart: always
+        image: postgres:14.4-bullseye
+        platform: linux/amd64
+        healthcheck:
+            test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "sa" ]
+            timeout: 45s
+            interval: 10s
+            retries: 10
+        ports:
+            - "5432:5432"
+        environment:
+            POSTGRES_USER: root
+            POSTGRES_PASSWORD: 123456
+            APP_DB_USER: username
+            APP_DB_PASS: password
+            APP_DB_NAME: dbname
+        volumes:
+            - ./init.sql:/docker-entrypoint-initdb.d/
