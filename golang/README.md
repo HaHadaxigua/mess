@@ -59,4 +59,4 @@ git config --global user.name git_username
 go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 
 golangci-lint run ./golangci.yml
-```
+``` 
