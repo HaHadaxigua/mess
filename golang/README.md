@@ -52,3 +52,11 @@ git config --global url."https://$git_username:git_token@git_host".insteadOf "gi
 git config --global user.email git_email
 git config --global user.name git_username
 ```
+
+## linter
+
+```shell
+go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+
+golangci-lint run ./golangci.yml
+```

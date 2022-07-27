@@ -102,7 +102,6 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # go
-# go
 export GOROOT=/usr/local/go
 export GOPATH=/Users/dh/go
 export GOBIN=$GOPATH/bin
