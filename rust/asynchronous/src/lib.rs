@@ -1,8 +1,8 @@
 #[cfg(test)]
 mod tests {
     use core::time;
+    use futures::executor::block_on;
     use std::thread;
-    use super::*;
 
     #[test]
     fn test_thread() {
@@ -12,12 +12,54 @@ mod tests {
         t_1.join().expect("thread one panic");
         t_2.join().expect("thread two panic");
     }
-    
+
     #[test]
     fn test_async() {
-        async fn async_example() {
-
+        async fn hello_world() {
+            println!("hello world");
         }
+
+        let future = hello_world();
+        block_on(future);
     }
 
+    #[test]
+    fn test_await() {
+        struct Song;
+        async fn learn_song() -> Song {
+            println!("learn song");
+            Song {}
+        }
+        async fn sing_song(_song: Song) {
+            println!("sing_song");
+        }
+        async fn dance() {
+            println!("dance");
+        }
+
+        async fn learn_and_sing() {
+            let song = learn_song().await;
+            sing_song(song).await;
+        }
+
+        async fn async_main() {
+            let f1 = learn_and_sing();
+            let f2 = dance();
+
+            futures::join!(f1, f2);
+        }
+
+        block_on(async_main());
+    }
+
+    #[test]
+    fn test_mock_socket_future() {
+        use std::fs::File;
+        pub struct SocketRead<'a> {
+            socket: &'a File;
+        }
+
+    }
+    
 }
+
