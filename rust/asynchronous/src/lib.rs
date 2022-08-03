@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod tests {
     use core::time;
-    use futures::executor::block_on;
+    use futures::{executor::block_on, Future};
     use std::thread;
 
     #[test]
@@ -53,13 +53,15 @@ mod tests {
     }
 
     #[test]
-    fn test_mock_socket_future() {
-        use std::fs::File;
-        pub struct SocketRead<'a> {
-            socket: &'a File;
+    fn test_async_syntax() {
+        async fn foo() -> u8 {
+            5
         }
-
+        fn bar() -> impl Future<Output = u8> {
+            async {
+                let x: u8 = foo().await;
+                x + 5
+            }
+        }
     }
-    
 }
-
