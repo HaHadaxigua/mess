@@ -20,4 +20,4 @@
 .store
 
 bin/
-/target
+target

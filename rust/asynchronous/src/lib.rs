@@ -64,4 +64,16 @@ mod tests {
             }
         }
     }
+
+    #[test]
+    fn test() {
+        struct My {
+            a: i32,
+            b: i32,
+            c: i32,
+        }
+
+        let y1 = My { a: 1, b: 1, c: 1 };
+        let x = My { ..y1 };
+    }
 }
